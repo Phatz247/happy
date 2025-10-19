@@ -30,9 +30,7 @@ function App() {
     if (button) {
       button.classList.add("clicked");
       setTimeout(() => {
-        alert(
-          "💝 Anh yêu em rất rất nhiều! 💝\n\nĐừng hù mất kết nối với anh nữa ạ! 🥰"
-        );
+        alert("");
         button.classList.remove("clicked");
       }, 300);
     }
@@ -58,10 +56,10 @@ function App() {
         <div className="relative z-10 max-w-md w-full">
           <div className="text-center mb-8">
             <h1 className="text-2xl md:text-3xl font-bold text-rose-700 mb-2 animate-float">
-              Tìm tương tư
+              Còn chờ cái vì nữa nhấn vào điii
             </h1>
             <p className="text-base md:text-lg text-rose-600 italic">
-              Nhấn vào phong bì để mở...
+              Nhấn điiiiiiiiiiiiii...
             </p>
           </div>
 
