@@ -223,8 +223,8 @@ function App() {
             </p>
 
             <p className="typing-line" style={{ animationDelay: "2s" }}>
-              Anh không biết em có thích thích món quà nhỏ này không, nhưng đây
-              là tấm lòng nhỏ của anh dành cho em. Anh mong là em sẽ thích nó!
+              Anh không biết em có thích món quà nhỏ này không, nhưng đây là tấm
+              lòng nhỏ của anh dành cho em. Anh mong là em sẽ thích nó!
             </p>
 
             <p className="typing-line" style={{ animationDelay: "5s" }}>
