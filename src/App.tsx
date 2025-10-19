@@ -8,6 +8,9 @@ function App() {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
   const [showLetter, setShowLetter] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [showQuestion, setShowQuestion] = useState(false);
+  const [noButtonPos, setNoButtonPos] = useState({ x: 0, y: 0 });
+  const [isNoButtonRunning, setIsNoButtonRunning] = useState(false);
 
   useEffect(() => {
     const newFlowers = Array.from({ length: 20 }, (_, i) => ({
@@ -18,6 +21,15 @@ function App() {
     }));
     setFlowers(newFlowers);
   }, []);
+
+  useEffect(() => {
+    if (showMessage) {
+      const timer = setTimeout(() => {
+        setShowQuestion(true);
+      }, 9000);
+      return () => clearTimeout(timer);
+    }
+  }, [showMessage]);
 
   const handleOpenEnvelope = () => {
     setIsEnvelopeOpen(true);
@@ -34,6 +46,40 @@ function App() {
         button.classList.remove("clicked");
       }, 300);
     }
+  };
+
+  const handleNoClick = () => {
+    setIsNoButtonRunning(true);
+    // Tạo animation vòng tròn xung quanh thư
+    let angle = 0;
+    const radius = 180;
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    const interval = setInterval(() => {
+      if (!isNoButtonRunning) {
+        clearInterval(interval);
+        return;
+      }
+      angle += 5;
+      const x = centerX + radius * Math.cos((angle * Math.PI) / 180);
+      const y = centerY + radius * Math.sin((angle * Math.PI) / 180);
+      setNoButtonPos({ x, y });
+    }, 50);
+  };
+
+  const handleMouseEnter = () => {
+    if (!isNoButtonRunning) return;
+    // Chạy trốn khi di chuột vào
+    const randomX = Math.random() * (window.innerWidth * 0.6 - 200);
+    const randomY = Math.random() * (window.innerHeight * 0.6 - 100);
+    setNoButtonPos({ x: randomX, y: randomY });
+  };
+
+  const handleYesClick = () => {
+    setIsNoButtonRunning(false);
+    alert("💝 Cảm ơn ẻm ! 💕");
+    setShowQuestion(false);
   };
 
   if (!isEnvelopeOpen) {
@@ -89,11 +135,7 @@ function App() {
             </div>
           </button>
 
-          <div className="text-center mt-8">
-            <p className="text-rose-600 text-base font-medium animate-bounce">
-              👆 Nhấn vào phong bì
-            </p>
-          </div>
+          <div className="text-center mt-8"></div>
         </div>
 
         <div className="hearts-background">
@@ -181,18 +223,44 @@ function App() {
             </p>
 
             <p className="typing-line" style={{ animationDelay: "2s" }}>
-              Anh không biết em có thích món quà nhỏ này không, nhưng đây là tấm
-              lòng nhỏ của anh dành cho em. Anh mong là em sẽ thích nó!
+              Anh không biết em có thích thích món quà nhỏ này không, nhưng đây
+              là tấm lòng nhỏ của anh dành cho em. Anh mong là em sẽ thích nó!
             </p>
 
             <p className="typing-line" style={{ animationDelay: "5s" }}>
-              Chúc ẻm 20-10 vui vẻ nha❤️!!!!!!
+              Chúc ẻm 20-10 vui vẻ nha❤️, đừng có doạ mất kết nối nữa
+              nhoo🥹!!!!!!
             </p>
 
-            <div
-              className="text-center mt-8 typing-line"
-              style={{ animationDelay: "6s" }}
-            ></div>
+            {showQuestion && (
+              <div className="text-center mt-8 typing-line">
+                <p className="text-lg font-bold text-rose-700 mb-6">
+                  Đọc xong rồi thì thơm 1 cái đi hẹ hẹ! 💕
+                </p>
+                <div className="flex gap-4 justify-center">
+                  <button
+                    onClick={handleYesClick}
+                    className="px-6 py-2 bg-rose-500 text-white font-bold rounded-full hover:bg-rose-600 transition-all"
+                  >
+                    Có ❤️
+                  </button>
+                  <button
+                    onClick={handleNoClick}
+                    onMouseEnter={handleMouseEnter}
+                    className="px-6 py-2 bg-rose-500 text-white font-bold rounded-full hover:bg-rose-600"
+                    style={{
+                      position: noButtonPos.x !== 0 ? "fixed" : "relative",
+                      left: noButtonPos.x ? `${noButtonPos.x}px` : "auto",
+                      top: noButtonPos.y ? `${noButtonPos.y}px` : "auto",
+                      transition: "left 0.2s ease-out, top 0.2s ease-out",
+                      zIndex: 50,
+                    }}
+                  >
+                    Không 😂
+                  </button>
+                </div>
+              </div>
+            )}
 
             <div
               className="text-center mt-6 typing-line"
