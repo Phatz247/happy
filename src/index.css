@@ -1,0 +1,229 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0.5;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(244, 114, 182, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(244, 114, 182, 0);
+  }
+}
+
+.flower {
+  animation: fall linear infinite;
+  pointer-events: none;
+}
+
+.sparkle {
+  animation: sparkle 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient 3s ease infinite;
+}
+
+.floating-heart {
+  animation: floatUp linear infinite;
+  pointer-events: none;
+}
+
+.love-button {
+  animation: buttonPulse 2s infinite;
+}
+
+.love-button:hover {
+  animation: buttonPulse 1s infinite;
+}
+
+.love-button.clicked {
+  animation: none;
+  transform: scale(0.95);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.envelope-wrapper {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.envelope-wrapper:hover {
+  transform: scale(1.05);
+}
+
+.envelope-container {
+  width: 280px;
+  height: 200px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.envelope-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ff6b9d 0%, #ffc3a0 100%);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.envelope-front {
+  position: absolute;
+  width: 100%;
+  height: 60%;
+  bottom: 0;
+  background: linear-gradient(135deg, #ff8fab 0%, #ffd1ba 100%);
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.envelope-flap {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  top: 0;
+  background: linear-gradient(135deg, #ff8fab 0%, #ffd1ba 100%);
+  transform-origin: top center;
+  border-radius: 8px 8px 0 0;
+  clip-path: polygon(0 0, 50% 60%, 100% 0);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.letter-preview {
+  position: absolute;
+  width: 80%;
+  height: 70%;
+  top: 20%;
+  left: 10%;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #ffc3a0;
+}
+
+.letter-content-preview {
+  text-align: center;
+  padding: 10px;
+}
+
+.heart-decoration {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.1);
+  }
+}
+
+.letter-full {
+  animation: slideUp 1s ease-out;
+}
+
+.letter-slide-up {
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.typing-animation .typing-line {
+  opacity: 0;
+  animation: typingFadeIn 0.8s ease forwards;
+}
+
+@keyframes typingFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
